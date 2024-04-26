@@ -1,11 +1,17 @@
-type Props = {
-  value?: string;
-};
+import { useState } from "react";
 
-const Square: React.FC<Props> = ({ value }) => {
+const Square: React.FC = () => {
+  const [value, setValue] = useState("");
+
+  const handleClick = () => {
+    setValue("X");
+  };
+
   return (
     <>
-      <button className="square">{value}</button>
+      <button className="square" onClick={handleClick}>
+        {value}
+      </button>
     </>
   );
 };
