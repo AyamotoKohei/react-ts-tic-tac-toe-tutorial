@@ -1,15 +1,12 @@
-import { useState } from "react";
+type Props = {
+  value: string;
+  onSquareClick: React.MouseEventHandler<HTMLButtonElement>;
+};
 
-const Square = () => {
-  const [value, setValue] = useState("");
-
-  const handleClick = () => {
-    setValue("X");
-  };
-
+const Square: React.FC<Props> = ({ value, onSquareClick }) => {
   return (
     <>
-      <button className="square" onClick={handleClick}>
+      <button className="square" onClick={onSquareClick}>
         {value}
       </button>
     </>
