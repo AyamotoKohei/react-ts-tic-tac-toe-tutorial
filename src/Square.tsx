@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Square: React.FC = () => {
+const Square = () => {
   const [value, setValue] = useState("");
 
   const handleClick = () => {
