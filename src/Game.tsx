@@ -4,15 +4,19 @@ import { useState } from "react";
 const Game = () => {
   const [xIsNext, setXIsNext] = useState(true);
   const [history, setHistory] = useState([Array(9).fill("")]);
-  const currentSquares: string[] = history[history.length - 1];
+  const [currentMove, setCurrentMove] = useState(0);
+  const currentSquares: string[] = history[currentMove];
 
   const handlePlay = (nextSquares: string[]) => {
-    setHistory([...history, nextSquares]);
+    const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
+    setHistory(nextHistory);
+    setCurrentMove(nextHistory.length - 1);
     setXIsNext(!xIsNext);
   };
 
   const jumpTo = (nextMove: number) => {
-    // todo
+    setCurrentMove(nextMove);
+    setXIsNext(nextMove % 2 === 0);
   };
 
   const moves = history.map((squares: string[], move: number) => {
