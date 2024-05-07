@@ -1,6 +1,10 @@
 import Square from "./Square";
 
-import { useState } from "react";
+type Props = {
+  xIsNext: boolean;
+  squares: string[];
+  onPlay: (squares: string[]) => void;
+};
 
 const calculateWinner = (squares: string[]) => {
   const lines = [
@@ -21,16 +25,12 @@ const calculateWinner = (squares: string[]) => {
   return null;
 };
 
-const Board = () => {
-  const [xIsNext, setXIsNext] = useState(true);
-  const [squares, setSquares] = useState(Array(9).fill(""));
-
+const Board: React.FC<Props> = ({ xIsNext, squares, onPlay }) => {
   const handleClick = (index: number) => {
     if (squares[index] || calculateWinner(squares)) return;
     const nextSquares = squares.slice();
     nextSquares[index] = xIsNext ? "X" : "O";
-    setSquares(nextSquares);
-    setXIsNext(!xIsNext);
+    onPlay(nextSquares);
   };
 
   const winner = calculateWinner(squares);
